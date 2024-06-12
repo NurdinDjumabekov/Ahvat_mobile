@@ -1,0 +1,29 @@
+a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(139, 138, 138, 0.516);
+  position: relative;
+  font-size: 25px;
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 8px;
+  justify-content: flex-start;
+  background-color: rgba(95, 230, 165, 0.99);
+  background-color: rgba(171, 185, 238, 0.233);
+  text-decoration: underline;
+  color: rgba(215, 35, 65, 0.756);
+  color: rgba(47, 71, 190, 0.591);
+  color: rgba(47, 71, 190, 0.287);
+  color: #24684dbc;
+  color: rgba(9, 73, 32, 0.186);
+  color: rgba(255, 255, 0, 0.653);
+  color: rgba(212, 223, 238, 0.47);
+  color: "rgba(12, 169, 70, 0.9)";
+  color:"#fff";
+  background: rgba(0, 0, 0, 0.252);
+  background: #536dfe81,
+
+}
+
+
