@@ -107,6 +107,7 @@ export const checkQrCodeDoctor = createAsyncThunk(
           Alert.alert(text_none_qr_code);
           await navigation.navigate("Main");
         } else {
+          console.log(response?.data, "response?.data");
           await navigation.navigate("Main");
           await navigation.navigate("ConfirmAnalizScreen", {
             data: response?.data?.[0],
@@ -151,7 +152,6 @@ export const getListAcceptInvoice = createAsyncThunk(
   /// список принятых qr кодов (анализов)
   "getListAcceptInvoice",
   async function ({ seller_guid }, { dispatch, rejectWithValue }) {
-    console.log(seller_guid, "seller_guid");
     try {
       const response = await axios({
         method: "GET",
@@ -531,6 +531,28 @@ export const acceptMoney = createAsyncThunk(
   }
 );
 
+/// getAllAnaliz
+//// get все анализы
+export const getAllAnaliz = createAsyncThunk(
+  "getAllAnaliz",
+  async function (seller_guid, { dispatch, rejectWithValue }) {
+    try {
+      const response = await axios({
+        method: "POST",
+        url: `${API}/ahvat/get_analiz`,
+        data: { seller_guid },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        return response?.data || [];
+      } else {
+        throw Error(`Error: ${response.status}`);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 /////////////////////////////// pay ////////////////////////////////
 
 const initialState = {
@@ -568,6 +590,7 @@ const initialState = {
 
   ///////// analiz
   listAcceptAnaliz: [],
+  listAnaliz: [], /// список анализов
 };
 
 const requestSlice = createSlice({
@@ -874,6 +897,20 @@ const requestSlice = createSlice({
     builder.addCase(addProdQrCode.pending, (state, action) => {
       state.preloader = true;
     });
+
+    ////// getAllAnaliz
+    builder.addCase(getAllAnaliz.fulfilled, (state, action) => {
+      state.preloader = false;
+      state.listAnaliz = action.payload?.map((i) => ({ ...i, bool: false }));
+    });
+    builder.addCase(getAllAnaliz.rejected, (state, action) => {
+      state.error = action.payload;
+      state.preloader = false;
+      Alert.alert("Упс, что-то пошло не так! Перезайдите в приложение...");
+    });
+    builder.addCase(getAllAnaliz.pending, (state, action) => {
+      state.preloader = true;
+    });
   },
 
   reducers: {
@@ -898,6 +935,13 @@ const requestSlice = createSlice({
     clearListAgents: (state, action) => {
       state.listAgents = [];
     },
+    changeChoiceAnalize: (state, action) => {
+      const { guid } = action.payload;
+
+      state.listAnaliz = state.listAnaliz?.map((i) =>
+        i.guid === guid ? { ...i, bool: !i?.bool } : i
+      );
+    },
   },
 });
 
@@ -909,6 +953,7 @@ export const {
   clearListCategory,
   changeListSellersPoints,
   clearListAgents,
+  changeChoiceAnalize,
 } = requestSlice.actions;
 
 export default requestSlice.reducer;

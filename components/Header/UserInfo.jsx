@@ -19,7 +19,7 @@ const UserInfo = () => {
     <View style={styles.parentBlock}>
       <Image style={styles.user} source={userImg} />
       <View>
-        <Text style={styles.userRole}>Фармацевт</Text>
+        <Text style={styles.userRole}>Врач</Text>
         <Text style={styles.userName}>{data?.seller_fio}</Text>
       </View>
     </View>

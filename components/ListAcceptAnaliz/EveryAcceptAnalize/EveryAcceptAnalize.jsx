@@ -4,14 +4,14 @@ import { Text, TouchableOpacity, View } from "react-native";
 ///// style
 import styles from "./style";
 
-export const EveryAcceptAnalize = ({ obj }) => {
+export const EveryAcceptAnalize = ({ obj, index }) => {
   //// кажждый принятый анализ
 
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.innerBlock}>
         <View style={styles.mainData}>
-          <Text style={styles.titleNum}>{obj.codeid}</Text>
+          <Text style={styles.titleNum}>{index + 1}</Text>
           <View>
             <Text
               style={[styles.titleDate, styles.role]}
@@ -23,13 +23,12 @@ export const EveryAcceptAnalize = ({ obj }) => {
             <Text style={styles.titleDate}>{obj.date}</Text>
           </View>
         </View>
-        <Text style={styles.comments} numberOfLines={4} ellipsizeMode="tail">
-          {obj?.analyze_type || "..."}
-        </Text>
-      </View>
-      <View style={styles.mainDataArrow}>
-        <View>
-          <Text style={styles.status}>Подтверждено</Text>
+        <View style={styles.listAnalizzz}>
+          {obj?.analyze_type?.map((item, index) => (
+            <Text style={styles.comments} key={item?.guid}>
+              {index > 0 ? `, ${item?.name_analiz}` : item?.name_analiz}
+            </Text>
+          ))}
         </View>
       </View>
     </TouchableOpacity>

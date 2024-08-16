@@ -5,7 +5,7 @@ import { getListAcceptInvoice } from "../../store/reducers/requestSlice";
 import { EveryAcceptAnalize } from "../../components/ListAcceptAnaliz/EveryAcceptAnalize/EveryAcceptAnalize";
 import { Text } from "react-native";
 
-export const ListAcceptAnalizScreen = ({ navigation }) => {
+export const ListAcceptAnalizScreen = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.saveDataSlice);
@@ -30,7 +30,9 @@ export const ListAcceptAnalizScreen = ({ navigation }) => {
         <FlatList
           contentContainerStyle={styles.flatListStyle}
           data={listAcceptAnaliz}
-          renderItem={({ item }) => <EveryAcceptAnalize obj={item} />}
+          renderItem={({ item, index }) => (
+            <EveryAcceptAnalize obj={item} index={index} />
+          )}
           keyExtractor={(item, index) => `${item.guid}${index}`}
           refreshControl={
             <RefreshControl refreshing={preloader} onRefresh={getData} />

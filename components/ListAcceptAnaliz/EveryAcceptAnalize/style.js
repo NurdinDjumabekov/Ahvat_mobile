@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
   innerBlock: {
     display: "flex",
-    width: "58%",
+    width: "100%",
     gap: 5,
   },
 
@@ -41,6 +41,11 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
 
+  listAnaliz: {
+    display: "flex",
+    flexDirection: "row",
+  },
+
   role: {
     fontSize: 14,
     fontWeight: "500",
@@ -49,14 +54,10 @@ const styles = StyleSheet.create({
     color: "rgba(47, 71, 190, 0.672)",
   },
 
-  status: { color: "rgba(12, 169, 70, 0.9)", fontSize: 13, fontWeight: "500" },
-
   totalPrice: {
     fontSize: 16,
     fontWeight: "400",
   },
-
-  comments: { maxWidth: 230 },
 
   mainData: {
     display: "flex",
@@ -65,13 +66,16 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 
-  mainDataArrow: {
+  listAnalizzz: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingRight: 15,
-    width: "33%",
+    width: "100%",
+    flexWrap: "wrap",
+  },
+
+  comments: {
+    fontWeight: "500",
+    fontSize: 12,
   },
 });
 
